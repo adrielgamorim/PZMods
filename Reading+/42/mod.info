@@ -1,8 +1,9 @@
-name=Reading+
+name=[B42.13]Reading+
 id=Reading+
-description= A mod that adds reading functionality.
+description= A mod that adds a couple of reading functionalities.
 poster=poster.png
-modversion=0.8
+icon=icon.png
+modversion=1.0
 versionMin=42.13
 versionMax=42.13
 author=Wttita

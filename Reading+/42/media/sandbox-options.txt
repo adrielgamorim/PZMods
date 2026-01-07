@@ -1,0 +1,19 @@
+VERSION = 1,
+
+option ReadingPlus.SittingSpeedMultiplier
+{
+    type = double,
+    min = 0.001,
+    max = 1.0,
+    default = 0.8,
+    page = ReadingPlus,
+    translation = ReadingPlus_SittingSpeedMultiplier,
+}
+
+option ReadingPlus.EnableWhileWalking
+{
+    type = boolean,
+    default = true,
+    page = ReadingPlus,
+    translation = ReadingPlus_EnableWhileWalking,
+}

@@ -1,0 +1,9 @@
+Sandbox_PT = {
+    Sandbox_ReadingPlus = "Reading+",
+    
+    Sandbox_ReadingPlus_SittingSpeedMultiplier = "Velocidade de Leitura Sentado",
+    Sandbox_ReadingPlus_SittingSpeedMultiplier_tooltip = "Multiplicador de velocidade de leitura enquanto sentado. Valores menores = leitura mais rápida. Padrão: 0.8 (20% mais rápido)",
+    
+    Sandbox_ReadingPlus_EnableWhileWalking = "Permitir Ler Andando",
+    Sandbox_ReadingPlus_EnableWhileWalking_tooltip = "Permite que personagens leiam livros enquanto andam. Padrão: ativado",
+}
