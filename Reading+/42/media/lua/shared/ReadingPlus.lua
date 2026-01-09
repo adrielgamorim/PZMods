@@ -8,25 +8,31 @@ local function getEnableReadWalking()
 	return getSandboxOptions():getOptionByName("ReadingPlus.EnableWhileWalking"):getValue()
 end
 
-print("Read sitting rate: " .. getSittingRate())
-
 local function isSittingInCar(character)
 	local vehicle = character:getVehicle()
 	return vehicle ~= nil and
-    (not character:isDriving() or
-    not vehicle:isDriver(character))
+			(not character:isDriving() or
+				not vehicle:isDriver(character))
 end
 
 local function isSitting(character)
 	return character:isSitOnGround() or
-    character:isSittingOnFurniture() or
-    isSittingInCar(character)
+			character:isSittingOnFurniture() or
+			isSittingInCar(character)
+end
+
+local function resumeReading(self)
+	self.character:Say(getText("UI_ReadingPlus_ResumeReading"))
+	LiteratureQueue:removeFirst()
+	ISTimedActionQueue.add(ISReadABook:new(self.character, self.item))
+	ReadSelected(self.character:getPlayerNum())
 end
 
 local ogISReadABook_getDuration = ISReadABook.getDuration
 local ogISReadABook_isValid = ISReadABook.isValid
 local ogISReadABook_new = ISReadABook.new
 local ogISReadABook_stop = ISReadABook.stop
+local ogISReadABook_perform = ISReadABook.perform
 
 function ISReadABook:getDuration()
 	local time = ogISReadABook_getDuration(self)
@@ -60,7 +66,7 @@ function ISReadABook:new(character, item, ...)
 
 	if not og.character:isTimedActionInstant() then
 		local previousIsSitting = isSitting(character)
-		og[modId] = {["previousIsSitting"] = previousIsSitting}
+		og[modId] = { ["previousIsSitting"] = previousIsSitting }
 	end
 
 	return og
@@ -68,12 +74,22 @@ end
 
 function ISReadABook:stop(...)
 	local og = ogISReadABook_stop(self, ...)
+
 	if not self.character:isTimedActionInstant() then
 		local isSit = isSitting(self.character)
+
 		if isSit ~= self[modId]["previousIsSitting"] then
-			ISTimedActionQueue.add(ISReadABook:new(self.character, self.item))
+			resumeReading(self)
 		end
 	end
 
 	return og
+end
+
+function ISReadABook:perform(...)
+	if LiteratureQueue:get(1) == self.item then
+		LiteratureQueue:removeFirst()
+	end
+
+	return ogISReadABook_perform(self, ...)
 end

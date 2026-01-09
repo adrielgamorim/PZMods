@@ -1,0 +1,3 @@
+ContextMenu_PTBR = {
+    ContextMenu_ReadingPlus_ReadSelectedBooks = "Ler Livros Selecionados",
+}
