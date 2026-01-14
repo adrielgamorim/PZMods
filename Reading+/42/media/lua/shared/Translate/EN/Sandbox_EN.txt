@@ -6,4 +6,7 @@ Sandbox_EN = {
     
     Sandbox_ReadingPlus_EnableWhileWalking = "Enable Reading While Walking",
     Sandbox_ReadingPlus_EnableWhileWalking_tooltip = "Allow characters to read books while walking. Default: enabled",
+
+    Sandbox_ReadingPlus_EnableConfirmationDialog = "Enable Confirmation Dialog",
+    Sandbox_ReadingPlus_EnableConfirmationDialog_tooltip = "Your character will confirm they're going back to reading after sitting. Default: enabled",
 }

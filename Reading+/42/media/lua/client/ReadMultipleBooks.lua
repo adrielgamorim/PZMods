@@ -1,11 +1,11 @@
 function ReadSelected(playerNum)
 	local character = getSpecificPlayer(playerNum)
-	local items = LiteratureQueue:getAll()
+	local queue = LiteratureQueue:getAll()
 
-	if character and items then
-		for i = 1, #items do
-			local item = items[i]
-			ISInventoryPaneContextMenu.readItem(item, playerNum)
+	if character and queue then
+		for i = 1, #queue do
+			local entry = queue[i]
+			ISInventoryPaneContextMenu.readItem(entry.item, playerNum)
 		end
 	end
 
@@ -17,7 +17,8 @@ local function readSelectedContextMenuOption(playerNum, context, items)
 
 	for _, item in ipairs(actualItems) do
 		if instanceof(item, "InventoryItem") and item:getCategory() == "Literature" then
-			LiteratureQueue:add(item)
+			local container = item:getContainer()
+			LiteratureQueue:add(item, container)
 		end
 	end
 

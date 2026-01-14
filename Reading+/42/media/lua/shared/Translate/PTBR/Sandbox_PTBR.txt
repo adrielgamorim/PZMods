@@ -1,4 +1,4 @@
-Sandbox_PT = {
+Sandbox_PTBR = {
     Sandbox_ReadingPlus = "Reading+",
     
     Sandbox_ReadingPlus_SittingSpeedMultiplier = "Velocidade de Leitura Sentado",
@@ -6,4 +6,7 @@ Sandbox_PT = {
     
     Sandbox_ReadingPlus_EnableWhileWalking = "Permitir Ler Andando",
     Sandbox_ReadingPlus_EnableWhileWalking_tooltip = "Permite que personagens leiam livros enquanto andam. Padrão: ativado",
+
+    Sandbox_ReadingPlus_EnableConfirmationDialog = "Exibir Diálogo de Confirmação",
+    Sandbox_ReadingPlus_EnableConfirmationDialog_tooltip = "Seu personagem confirmará que está voltando a ler após sentar. Padrão: ativado",
 }
