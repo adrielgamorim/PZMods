@@ -1,19 +1,20 @@
 local modId = "Reading+"
 
-local function getSittingRate()
-	return getSandboxOptions():getOptionByName("ReadingPlus.SittingSpeedMultiplier"):getValue()
+local function isSittingInCar(character)
+    local vehicle = character:getVehicle()
+    return vehicle ~= nil and
+            (not character:isDriving() or
+                not vehicle:isDriver(character))
 end
 
-local function getEnableReadWalking()
-	return getSandboxOptions():getOptionByName("ReadingPlus.EnableWhileWalking"):getValue()
-end
-
-local function getEnableConfirmationDialog()
-	return getSandboxOptions():getOptionByName("ReadingPlus.EnableConfirmationDialog"):getValue()
+function IsSitting(character)
+    return character:isSitOnGround() or
+            character:isSittingOnFurniture() or
+            isSittingInCar(character)
 end
 
 local function resumeReading(self, isFirstQueueItemOnInventory)
-	if getEnableConfirmationDialog() then
+	if ReadingPlusSandboxOptions.getEnableConfirmationDialog() then
 		self.character:Say(getText("UI_ReadingPlus_ResumeReading"))
 	end
 	if isFirstQueueItemOnInventory then
@@ -29,13 +30,12 @@ local ogISReadABook_isValid = ISReadABook.isValid
 local ogISReadABook_new = ISReadABook.new
 local ogISReadABook_stop = ISReadABook.stop
 local ogISReadABook_perform = ISReadABook.perform
-local ogISTimedActionQueue_tick = nil
 
 function ISReadABook:getDuration()
 	local time = ogISReadABook_getDuration(self)
 
 	if IsSitting(self.character) then
-		time = time * getSittingRate()
+		time = time * ReadingPlusSandboxOptions.getSittingRate()
 	end
 
 	return time
@@ -59,7 +59,7 @@ end
 
 function ISReadABook:new(character, item, ...)
 	local og = ogISReadABook_new(self, character, item, ...)
-	og.stopOnWalk = not getEnableReadWalking()
+	og.stopOnWalk = not ReadingPlusSandboxOptions.getEnableReadWalking()
 
 	if not og.character:isTimedActionInstant() then
 		local previousIsSitting = IsSitting(character)
@@ -85,39 +85,9 @@ end
 
 function ISReadABook:perform(...)
 	local firstItem = LiteratureQueue:getItem(1)
-	if firstItem == self.item then
+	if firstItem and firstItem:getName() == self.item:getName() then
 		LiteratureQueue:removeFirst()
 	end
 
 	return ogISReadABook_perform(self, ...)
 end
-
--- if ISTimedActionQueue and ISTimedActionQueue.tick then
--- 	ogISTimedActionQueue_tick = ISTimedActionQueue.tick
--- end
-
--- print('Reading+: ' .. ISTimedActionQueue, ogISTimedActionQueue_tick)
--- if ISTimedActionQueue and ogISTimedActionQueue_tick then
--- 	function ISTimedActionQueue:tick()
--- 		local action = self.queue[1]
--- 		if action == nil then
--- 			self:clearQueue()
--- 			return
--- 		end
--- 		if not action.character:getCharacterActions():contains(action.action) then
--- 			print('Reading+: ISTimedActionQueue:tick: Literature queue: ' .. tostring(#LiteratureQueue:getAll()))
--- 			if not LiteratureQueue:isEmpty() then
--- 				print('Reading+: ISTimedActionQueue:tick: bugged action, but LiteratureQueue not empty, resuming reading')
--- 				self:resetQueue()
--- 				local character = action.character
--- 				local litQueue = LiteratureQueue:getAll()
--- 				local firstItem = litQueue[1]
--- 				local isFirstQueueItemOnInventory = character:getInventory():contains(firstItem)
--- 				resumeReading({ character = character, item = firstItem }, isFirstQueueItemOnInventory)
--- 				return
--- 			end
--- 		end
-
--- 		return ogISTimedActionQueue_tick(self)
--- 	end
--- end

@@ -1,10 +1,9 @@
 name=[B42.13]Reading+
 id=Reading+
-description= A mod that adds a couple of reading functionalities.
+description= A mod that adds a few reading functionalities.
 poster=poster.png
 icon=icon.png
-modversion=1.1.1
+modversion=1.4
 versionMin=42.13
-versionMax=42.13
 author=Wttita
 tags=Build 42, 42.13, Reading, Utility

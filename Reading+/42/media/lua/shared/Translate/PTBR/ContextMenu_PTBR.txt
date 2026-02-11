@@ -1,3 +1,5 @@
 ContextMenu_PTBR = {
-    ContextMenu_ReadingPlus_ReadSelectedBooks = "Ler Livros Selecionados",
+    ContextMenu_ReadingPlus_ReadSelectedBooks = "Ler Seleção",
+    ContextMenu_ReadingPlus_SitAndReadSelectedBooks = "Sentar e Ler Seleção",
+    ContextMenu_ReadingPlus_SitAndReadBook = "Sentar e Ler",
 }

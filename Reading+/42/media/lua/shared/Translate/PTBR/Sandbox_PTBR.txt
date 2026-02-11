@@ -9,4 +9,10 @@ Sandbox_PTBR = {
 
     Sandbox_ReadingPlus_EnableConfirmationDialog = "Exibir Diálogo de Confirmação",
     Sandbox_ReadingPlus_EnableConfirmationDialog_tooltip = "Seu personagem confirmará que está voltando a ler após sentar. Padrão: ativado",
+
+    Sandbox_ReadingPlus_FilterAlreadyReadBooks = "Filtrar Livros Já Lidos",
+    Sandbox_ReadingPlus_FilterAlreadyReadBooks_tooltip = "Literatura que já foi lida será ignorada pela fila de leitura. Padrão: ativado",
+
+    Sandbox_ReadingPlus_FilterAboveLevelBooks = "Filtrar Livros Muito Avançados",
+    Sandbox_ReadingPlus_FilterAboveLevelBooks_tooltip = "Literatura que está acima do nível de habilidade atual do personagem será ignorada pela fila de leitura. Padrão: ativado",
 }

@@ -25,3 +25,19 @@ option ReadingPlus.EnableConfirmationDialog
     page = ReadingPlus,
     translation = ReadingPlus_EnableConfirmationDialog,
 }
+
+option ReadingPlus.FilterAlreadyReadBooks
+{
+    type = boolean,
+    default = true,
+    page = ReadingPlus,
+    translation = ReadingPlus_FilterAlreadyReadBooks,
+}
+
+option ReadingPlus.FilterAboveLevelBooks
+{
+    type = boolean,
+    default = true,
+    page = ReadingPlus,
+    translation = ReadingPlus_FilterAboveLevelBooks,
+}
