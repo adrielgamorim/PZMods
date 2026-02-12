@@ -1,0 +1,18 @@
+Sandbox_PL = {
+    Sandbox_ReadingPlus = "Reading+",
+    
+    Sandbox_ReadingPlus_SittingSpeedMultiplier = "Mnożnik prędkości czytania na siedząco",
+    Sandbox_ReadingPlus_SittingSpeedMultiplier_tooltip = "Mnożnik prędkości czytania podczas siedzenia. Niższe wartości = szybsze czytanie. Domyślnie: 0.8 (20% szybciej)",
+    
+    Sandbox_ReadingPlus_EnableWhileWalking = "Włącz czytanie podczas chodzenia",
+    Sandbox_ReadingPlus_EnableWhileWalking_tooltip = "Pozwala postaciom czytać książki podczas chodzenia. Domyślnie: włączone",
+
+    Sandbox_ReadingPlus_EnableConfirmationDialog = "Włącz okno potwierdzenia",
+    Sandbox_ReadingPlus_EnableConfirmationDialog_tooltip = "Postać potwierdzi powrót do czytania po usiąściu. Domyślnie: włączone",
+
+    Sandbox_ReadingPlus_FilterAlreadyReadBooks = "Filtruj już przeczytane książki",
+    Sandbox_ReadingPlus_FilterAlreadyReadBooks_tooltip = "Literatura, która została już przeczytana, będzie ignorowana przez kolejkę czytania. Domyślnie: włączone",
+
+    Sandbox_ReadingPlus_FilterAboveLevelBooks = "Filtruj książki powyżej poziomu",
+    Sandbox_ReadingPlus_FilterAboveLevelBooks_tooltip = "Literatura, która jest powyżej aktualnego poziomu umiejętności postaci, będzie ignorowana przez kolejkę czytania. Domyślnie: włączone",
+}

@@ -1,0 +1,5 @@
+ContextMenu_PL = {
+    ContextMenu_ReadingPlus_ReadSelectedBooks = "Przeczytaj wybrane książki",
+    ContextMenu_ReadingPlus_SitAndReadSelectedBooks = "Usiądź i przeczytaj wybrane książki",
+    ContextMenu_ReadingPlus_SitAndReadBook = "Usiądź i przeczytaj książkę",
+}
