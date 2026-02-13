@@ -59,7 +59,8 @@ function LiteratureQueue:filter(character, filter)
 		end
 		local wasAlreadyRead
 		if isSkillBook then
-			wasAlreadyRead = entry.item:getAlreadyReadPages() >= entry.item:getNumberOfPages()
+			local readPages = character:getAlreadyReadPages(entry.item:getFullType())
+			wasAlreadyRead = readPages >= entry.item:getNumberOfPages()
 		else
 			wasAlreadyRead = ISInventoryPane:isLiteratureRead(character, entry.item)
 		end
