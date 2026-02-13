@@ -44,17 +44,7 @@ local function readSelectedContextMenuOption(playerNum, context, items)
 		end
 	end
 
-	if ReadingPlusSandboxOptions.getFilterAboveLevelBooks() then
-		LiteratureQueue:filter(character, "advanced")
-	end
-	if ReadingPlusSandboxOptions.getFilterAlreadyReadBooks() then
-		LiteratureQueue:filter(character, "alreadyRead")
-	end
-
-	if LiteratureQueue:isEmpty() then return end
-
-	local iconTexture = getTexture("media/ui/ReadingPlus_icon.png")
-	if #LiteratureQueue:getAll() == 1 then
+	local function createButtonForSingleLiteratureItem()
 		if not IsSitting(character) then
 			local sitAndRead = context:insertOptionAfter(
 				getText("ContextMenu_Read"),
@@ -63,9 +53,32 @@ local function readSelectedContextMenuOption(playerNum, context, items)
 				ReadSelected,
 				true)
 			sitAndRead.iconTexture = LiteratureQueue:getItem(1):getTexture()
+			local literatureState = ReadingPlusHelpers:getLiteratureState(character, LiteratureQueue:getItem(1))
+			local cannotRead = literatureState.isTooAdvanced or literatureState.wasAlreadyRead
+			if cannotRead then sitAndRead.notAvailable = true end
 		end
+	end
+
+	if #LiteratureQueue:getAll() == 1 then
+		createButtonForSingleLiteratureItem()
 		return
 	end
+
+	if ReadingPlusSandboxOptions.getFilterAboveLevelBooks() then
+		LiteratureQueue:filter(character, "advanced")
+	end
+	if ReadingPlusSandboxOptions.getFilterAlreadyReadBooks() then
+		LiteratureQueue:filter(character, "alreadyRead")
+	end
+
+	if #LiteratureQueue:getAll() == 1 then
+		createButtonForSingleLiteratureItem()
+		return
+	end
+
+	if LiteratureQueue:isEmpty() then return end
+
+	local iconTexture = getTexture("media/ui/ReadingPlus_icon.png")
 
 	local readSelectedOption = context:insertOptionAfter(
 		getText("ContextMenu_Equip_Secondary"),

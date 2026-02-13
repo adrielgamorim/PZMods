@@ -51,24 +51,12 @@ function LiteratureQueue:filter(character, filter)
 	local indexesToRemove = {}
 
 	for i, entry in ipairs(queue) do
-		local skillBook = SkillBook[entry.item:getSkillTrained()]
-		local isSkillBook = skillBook ~= nil
-		local isTooAdvanced
-		if entry.item:getLvlSkillTrained() ~= -1 or (skillBook and skillBook.perk) then
-			isTooAdvanced = entry.item:getLvlSkillTrained() > character:getPerkLevel(skillBook.perk) + 1
-		end
-		local wasAlreadyRead
-		if isSkillBook then
-			local readPages = character:getAlreadyReadPages(entry.item:getFullType())
-			wasAlreadyRead = readPages >= entry.item:getNumberOfPages()
-		else
-			wasAlreadyRead = ISInventoryPane:isLiteratureRead(character, entry.item)
-		end
+		local state = ReadingPlusHelpers:getLiteratureState(character, entry.item)
 
 		if filter == "advanced" then
-			if isTooAdvanced then table.insert(indexesToRemove, i) end
+			if state.isTooAdvanced then table.insert(indexesToRemove, i) end
 		elseif filter == "alreadyRead" then
-			if wasAlreadyRead then table.insert(indexesToRemove, i) end
+			if state.wasAlreadyRead then table.insert(indexesToRemove, i) end
 		end
 	end
 
